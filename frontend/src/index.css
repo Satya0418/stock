@@ -1,0 +1,253 @@
+/**
+ * ==============================================================================
+ * Global CSS Styles
+ * ==============================================================================
+ * 
+ * This file contains:
+ * 1. Tailwind CSS directives (@tailwind base, components, utilities)
+ * 2. Custom global styles
+ * 3. CSS custom properties (variables)
+ * 4. Custom utility classes not in Tailwind
+ * 
+ * Tailwind Directives:
+ * - @tailwind base: Normalize/reset styles
+ * - @tailwind components: Component classes (buttons, cards, etc.)
+ * - @tailwind utilities: Utility classes (margin, padding, flex, etc.)
+ * ==============================================================================
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* Tailwind CSS base styles and reset */
+@tailwind base;
+
+/* Tailwind CSS component styles */
+@tailwind components;
+
+/* Tailwind CSS utility classes */
+@tailwind utilities;
+
+/* ==============================================================================
+   CSS Custom Properties (Variables)
+   ============================================================================== */
+
+:root {
+  /* Color scheme for system preference detection */
+  color-scheme: dark;
+  
+  /* Custom colors as CSS variables for easy theming */
+  --color-bullish: #22c55e;
+  --color-bearish: #ef4444;
+  --color-neutral: #9ca3af;
+  
+  /* Dashboard colors */
+  --color-bg: #0f172a;
+  --color-card: #1e293b;
+  --color-border: #334155;
+  --color-text: #f1f5f9;
+  --color-text-muted: #94a3b8;
+  
+  /* Animation speeds */
+  --transition-fast: 150ms;
+  --transition-normal: 300ms;
+  --transition-slow: 500ms;
+}
+
+/* ==============================================================================
+   Base Styles
+   ============================================================================== */
+
+/* Apply default font and background to body */
+body {
+  @apply font-sans antialiased;
+  background: radial-gradient(circle at top, #111827, #0f172a 45%, #020617 100%);
+  color: var(--color-text);
+}
+
+/* Smooth scrolling for the whole page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Remove default button styles */
+button {
+  @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-dashboard-bg;
+}
+
+/* ==============================================================================
+   Custom Component Styles
+   ============================================================================== */
+
+/* Card component base style */
+@layer components {
+  .card {
+    @apply bg-dashboard-card border border-dashboard-border rounded-xl p-4 shadow-card;
+    @apply transition-all duration-300;
+  }
+  
+  .card:hover {
+    @apply shadow-card-hover;
+  }
+  
+  /* Index card specific styles */
+  .index-card {
+    @apply card;
+    @apply hover:border-blue-500/30;
+  }
+  
+  /* Status badge styles */
+  .badge {
+    @apply px-2 py-1 rounded-full text-xs font-medium;
+  }
+  
+  .badge-bullish {
+    @apply badge bg-bullish/20 text-bullish;
+  }
+  
+  .badge-bearish {
+    @apply badge bg-bearish/20 text-bearish;
+  }
+  
+  .badge-neutral {
+    @apply badge bg-neutral-dark/20 text-neutral;
+  }
+  
+  /* Live indicator dot */
+  .live-indicator {
+    @apply inline-block w-2 h-2 bg-green-500 rounded-full;
+    animation: pulse 2s infinite;
+  }
+  
+  /* Section header */
+  .section-header {
+    @apply text-xl font-semibold text-white mb-4;
+  }
+}
+
+/* ==============================================================================
+   Custom Utility Classes
+   ============================================================================== */
+
+@layer utilities {
+  /* Text gradient for fancy headings */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500;
+  }
+  
+  /* Bullish/Bearish text colors */
+  .text-bullish {
+    color: var(--color-bullish);
+  }
+  
+  .text-bearish {
+    color: var(--color-bearish);
+  }
+  
+  /* Number display with monospace font */
+  .number-display {
+    @apply font-mono tabular-nums;
+  }
+  
+  /* Smooth number transitions */
+  .number-transition {
+    transition: all var(--transition-normal) ease-in-out;
+  }
+  
+  /* Glow effect for important numbers */
+  .glow-bullish {
+    text-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+  }
+  
+  .glow-bearish {
+    text-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+  }
+}
+
+/* ==============================================================================
+   Animations
+   ============================================================================== */
+
+/* Pulse animation for live indicator */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Fade in animation for new elements */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Number flash animation when value changes */
+@keyframes numberFlash {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.animate-number-flash {
+  animation: numberFlash 0.5s ease-in-out;
+}
+
+/* ==============================================================================
+   Custom Scrollbar (Webkit browsers)
+   ============================================================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* ==============================================================================
+   Chart.js Custom Styles
+   ============================================================================== */
+
+/* Override chart canvas styles */
+.chart-container {
+  @apply relative w-full;
+  min-height: 200px;
+}
+
+/* Chart legend styles */
+.chart-legend {
+  @apply flex justify-center gap-4 mt-2 text-sm;
+}
+
+.chart-legend-item {
+  @apply flex items-center gap-2;
+}
+
+.chart-legend-color {
+  @apply w-3 h-3 rounded-sm;
+}

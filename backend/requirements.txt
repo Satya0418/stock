@@ -1,0 +1,103 @@
+# ==============================================================================
+# Production Dependencies for Indian Stock Market Dashboard
+# ==============================================================================
+# This file lists all Python packages required to run the backend application.
+# Install with: pip install -r requirements.txt
+# ==============================================================================
+
+# Django Core Framework
+# Django is our main web framework - version 4.2 is LTS (Long Term Support)
+Django>=4.2,<5.0
+
+# Django REST Framework
+# Provides tools to build RESTful APIs with serialization, views, authentication
+djangorestframework>=3.14.0
+
+# JWT Authentication
+# Secure token-based auth for APIs
+djangorestframework-simplejwt>=5.3.1
+
+# Django Channels
+# Enables WebSocket support and async capabilities in Django
+channels>=4.0.0
+
+# Channels Redis
+# Redis backend for Django Channels - handles WebSocket message passing
+channels-redis>=4.1.0
+
+# Redis Python Client
+# Direct Redis connection for caching market data
+redis>=5.0.0
+
+# Celery
+# Background task queue and scheduler
+celery>=5.3.6
+django-celery-beat>=2.5.0
+django-celery-results>=2.5.1
+
+# Django CORS Headers
+# Handles Cross-Origin Resource Sharing for frontend-backend communication
+django-cors-headers>=4.3.0
+
+# Environment Variables
+# Loads secrets from .env file - NEVER commit secrets to git
+python-dotenv>=1.0.0
+
+# Angel One SmartAPI
+# Official SDK for Angel One trading platform - provides market data
+smartapi-python>=1.4.0
+
+# WebSocket Client
+# Required by Angel One SDK for real-time data streaming
+websocket-client>=1.6.0
+
+# PyOTP - One Time Password
+# Generates TOTP codes for Angel One API authentication
+pyotp>=2.9.0
+
+# Requests
+# HTTP library for REST API calls
+requests>=2.31.0
+
+# Cryptography
+# Encrypt sensitive credentials at rest
+cryptography>=42.0.0
+
+# PostgreSQL Driver
+psycopg2-binary>=2.9.9
+
+# APScheduler
+# Advanced Python Scheduler - for scheduled tasks like token refresh
+APScheduler>=3.10.0
+
+# Uvicorn
+# ASGI server for running Django with WebSocket support in production
+uvicorn[standard]>=0.24.0
+
+# Gunicorn (optional - for production with uvicorn workers)
+gunicorn>=21.0.0
+
+# Logging and Monitoring
+structlog>=23.2.0
+
+# Async support
+asgiref>=3.7.0
+
+# JSON handling
+orjson>=3.9.0
+
+# ==============================================================================
+# Development Dependencies (optional - for local development)
+# ==============================================================================
+
+# Django Debug Toolbar
+# django-debug-toolbar>=4.2.0
+
+# iPython (better shell)
+# ipython>=8.17.0
+
+# Black (code formatter)
+# black>=23.10.0
+
+# Flake8 (linter)
+# flake8>=6.1.0
